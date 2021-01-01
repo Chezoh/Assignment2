@@ -19,6 +19,8 @@ public class GameMain {
     */
    public GameMain() {
 	   // Create the grid
+	   grid.display();
+	   
 	   
 	   // TODO: Create a new instance of the "Grid"class
 	   
@@ -45,8 +47,10 @@ public class GameMain {
 	        	 if(winner == Player.X) {
 		        	 System.out.println("Player X wins!");
 		         }
-	        	 
-	        	 // TODO: Display result if player O wins
+	        	 else if (winner == Player.O) {
+	        		 System.out.println("Player O wins!");  
+	        	 }
+	        	 // TODO: Display result if player O wins  DONE 01/01
 	        	 
 	        	 // TODO: Display result if it was a draw
 	         }
@@ -64,21 +68,20 @@ public class GameMain {
    /** 
     * Handles the player making their move, checks if the move is valid before making it.
     */
-   public void playerMove(Player turnPlayer) {
+  public void playerMove(Player turnPlayer) {
 	   
       boolean validInput = false;
       
       do {
-    	  
     	  // Display instructions to the player
          if (turnPlayer == Player.X) {
             System.out.print("Player 'X', enter your move (row[1-3] column[1-3]): ");
          } else {
-            
-        	 // TODO: Inform Player 'O' to enter their move
-        	 
+        	 if (turnPlayer == Player.O) {
+        		 System.out.println("Player 'O', enter your move (row[1-3] column [1-3]");
+        	 }
+        	 // TODO: Inform Player 'O' to enter their move DONE 01/01
          }
-         
          // Obtains input from the player for both row and column
          int row = scanner.nextInt();
          int col = scanner.nextInt();
@@ -86,19 +89,19 @@ public class GameMain {
          // Decrease the value entered by 1 to compensate for the array index starting at 0
          row--;
          col--;
+      
+        //  Verify the values the player entered are valid (position is valid and empty)
+       if (row >= 0 && row < Grid.ROWS && col >= 0 && col < Grid.COLUMNS && grid.board[row][col].content == Player.EMPTY) {
+      	 grid.board[row][col].content = turnPlayer;
+      	 grid.currentRow = row;
+      	 grid.currentCol = col;
+       	 validInput = true;
+        } else {
+        	 System.out.println("Move not vaild. Please try again.");
+        	 // TODO: Display an error message that the move was not valid. DONE 01/01
+        }
          
-         // Verify the values the player entered are valid (position is valid and empty)
-         if (row >= 0 && row < Grid.ROWS && col >= 0 && col < Grid.COLUMNS && grid.board[row][col].content == Player.EMPTY) {
-        	 grid.board[row][col].content = turnPlayer;
-        	 grid.currentRow = row;
-        	 grid.currentCol = col;
-        	 validInput = true;
-         } else {
-        	 
-        	 // TODO: Display an error message that the move was not valid.
-         }
-         
-      } while (!validInput);   // Repeat until input is valid
+     } while (!validInput);   // Repeat until input is valid
    }
  
    /**

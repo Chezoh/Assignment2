@@ -9,9 +9,12 @@ public class Box {
    /**
     * Constructor
     */
-   public Box(int row, int col) {
+   public Box(int row, int col, Player content) {
 	   
 	   // TODO: Initialise the variables row, col, and content
+	   this.col = col;
+	   this.row = row;
+	   this.content = content;
   
    }
  
