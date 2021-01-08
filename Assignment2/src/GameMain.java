@@ -19,18 +19,19 @@ public class GameMain {
     */
    public GameMain() {
 	   // Create the grid
-	   grid.display();
-	   
-	   
 	   // TODO: Create a new instance of the "Grid"class
+	   grid = new Grid();
 	   
 	   // Reset the game variables to their defaults
-	   
+	   currentPlayer = Player.X; // Player X moves first
+	   gameOver = false;
+	   winner = null;
 	   // TODO: Assign the default values for currentPlayer (Player.X), gameOver (false), and winner (null)
 
 	   // Begin playing the game
 	   
 	   // TODO: Call the "play()" method
+	   play();
    }
    
    /**
@@ -47,11 +48,13 @@ public class GameMain {
 	        	 if(winner == Player.X) {
 		        	 System.out.println("Player X wins!");
 		         }
-	        	 else if (winner == Player.O) {
+	        	 else if(winner == Player.O) {
 	        		 System.out.println("Player O wins!");  
 	        	 }
 	        	 // TODO: Display result if player O wins  DONE 01/01
-	        	 
+	        	 else if (winner == null) {
+	        		 System.out.println("It is a draw!");
+	        	 }
 	        	 // TODO: Display result if it was a draw
 	         }
 	         
@@ -109,24 +112,28 @@ public class GameMain {
     */
    public void checkForWinner(Player turnPlayer) {
       if (grid.hasWon(turnPlayer)) {
-    	  
+    	  gameOver = (turnPlayer == Player.X);
+    	  }
     	  // TODO: Set gameOver and winner appropriately
-
-      } else if (grid.isDraw()) {
-
-    	  // TODO: Set gameOver and winner appropriately
+       else if (grid.isDraw()) {
+    	  gameOver = true;
+       }
       }
-   }
+    	  
+
+    	  // TODO: Set gameOver and winner appropriately
+      
+   
  
    /**
     * The main() method
     */
    public static void main(String[] args) {
-	   
+	   new GameMain();
 	   // TODO: Add a loop to restart the game once it has finished
 	   
 	   // TODO: Then update the loop to ask the player if they want to play again, exit if they do not
 	   
-	   new GameMain();
+	  
 	}
 }
